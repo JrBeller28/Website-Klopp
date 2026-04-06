@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: menu
+    // Fields:
+    //   - name: string (required)
+    //   - price: string (required)
+    //   - desc: string
+    //   - img: string
+    //   - category: string (required, ['Coffee', 'Non-Coffee', 'Main Course', 'Snacks'])
+    //   - order: number
+    //
+    // Collection: reservations
+    // Fields:
+    //   - name: string (required)
+    //   - email: string
+    //   - phone: string (required)
+    //   - date: string (required, ISO 8601)
+    //   - guests: number (required)
+    //   - status: string (['pending', 'confirmed', 'cancelled'])
+    //   - createdAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         (request.auth.token.email == "muhammad.adjiprasetyo28@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    function isValidMenuItem(data) {
+      return data.keys().hasAll(['name', 'price', 'category']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.price is string && data.price.size() > 0 && data.price.size() < 20 &&
+             data.category in ['Coffee', 'Non-Coffee', 'Main Course', 'Snacks'] &&
+             (!('desc' in data) || (data.desc is string && data.desc.size() < 500)) &&
+             (!('img' in data) || (data.img is string && data.img.size() < 1000)) &&
+             (!('order' in data) || (data.order is number));
+    }
+
+    function isValidReservation(data) {
+      return data.keys().hasAll(['name', 'phone', 'date', 'guests', 'createdAt']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.phone is string && data.phone.size() > 5 && data.phone.size() < 20 &&
+             data.date is string && data.date.matches("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.*Z?$") &&
+             data.guests is number && data.guests > 0 && data.guests <= 50 &&
+             data.createdAt is timestamp;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    // Menu: Publicly readable, anyone can write for now (DEMO ONLY)
+    match /menu/{itemId} {
+      allow read: if true;
+      allow write: if true; // WARNING: Insecure for production. Use Auth for real apps.
+    }
+
+    // Reservations: Publicly readable, anyone can write for now (DEMO ONLY)
+    match /reservations/{resId} {
+      allow read: if true;
+      allow write: if true; // WARNING: Insecure for production. Use Auth for real apps.
+    }
+
+    // User profiles: Only owner or admin can read/write
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+    }
+  }
+}

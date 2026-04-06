@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "A single item in the Klopp Cafe menu.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the dish or drink." },
+        "price": { "type": "string", "description": "Price (e.g., '28k')." },
+        "desc": { "type": "string", "description": "Short description of the item." },
+        "img": { "type": "string", "description": "URL to the item's image." },
+        "category": { "type": "string", "enum": ["Coffee", "Non-Coffee", "Main Course", "Snacks"], "description": "Menu category." },
+        "order": { "type": "number", "description": "Display order." }
+      },
+      "required": ["name", "price", "category"]
+    },
+    "Reservation": {
+      "title": "Reservation",
+      "description": "A table reservation request.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "guests": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "date", "guests"]
+    }
+  },
+  "firestore": {
+    "/menu": {
+      "schema": "MenuItem",
+      "description": "Collection of all menu items."
+    },
+    "/reservations": {
+      "schema": "Reservation",
+      "description": "Collection of customer reservations."
+    }
+  }
+}
