@@ -208,7 +208,7 @@ const Hero = ({ onBookToggle, onMenuToggle }: { onBookToggle: () => void, onMenu
       >
         <div className="absolute inset-0 bg-black/40 z-10" />
         <img 
-          src="https://picsum.photos/seed/klopp-interior/1920/1080" 
+          src="/Foto/2.png" 
           alt="Klopp Interior" 
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
@@ -452,7 +452,7 @@ const AboutSection = () => {
               <motion.img 
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.6 }}
-                src="https://picsum.photos/seed/klopp1/400/600" 
+                src="/src/unnamed.png" 
                 alt="Cafe" 
                 className="w-full h-full object-cover" 
                 referrerPolicy="no-referrer" 
@@ -462,7 +462,7 @@ const AboutSection = () => {
               <motion.img 
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.6 }}
-                src="https://picsum.photos/seed/klopp2/400/600" 
+                src="/Foto/4.png" 
                 alt="Cafe" 
                 className="w-full h-full object-cover" 
                 referrerPolicy="no-referrer" 
@@ -685,7 +685,7 @@ const PromoSection = () => {
           <div className="relative group">
             <div className="absolute -inset-4 bg-[var(--color-brand-accent)] rounded-[40px] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity" />
             <img 
-              src="https://picsum.photos/seed/klopp-promo/600/600" 
+              src="/Foto/2026-02-05.png" 
               alt="Promo Klopp" 
               className="w-72 h-72 md:w-96 md:h-96 object-cover rounded-[40px] relative z-10 shadow-2xl border-4 border-white/10 group-hover:scale-105 transition-transform duration-500"
               referrerPolicy="no-referrer"

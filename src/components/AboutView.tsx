@@ -93,7 +93,7 @@ export const AboutView = ({ onBack }: { onBack: () => void }) => {
             >
               <div className="aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl border-4 border-white/10">
                 <img 
-                  src="https://picsum.photos/seed/klopp-about/800/1000" 
+                  src="/src/unnamed.png" 
                   alt="Klopp Atmosphere" 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -183,12 +183,12 @@ export const AboutView = ({ onBack }: { onBack: () => void }) => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
-                  <img src="https://picsum.photos/seed/team1/400/500" alt="Team" className="rounded-3xl w-full aspect-[3/4] object-cover shadow-2xl" referrerPolicy="no-referrer" />
-                  <img src="https://picsum.photos/seed/team2/400/300" alt="Team" className="rounded-3xl w-full aspect-square object-cover shadow-2xl" referrerPolicy="no-referrer" />
+                  <img src="/Foto/4.png" alt="Team" className="rounded-3xl w-full aspect-[3/4] object-cover shadow-2xl" referrerPolicy="no-referrer" />
+                  <img src="/Foto/5.png" alt="Team" className="rounded-3xl w-full aspect-square object-cover shadow-2xl" referrerPolicy="no-referrer" />
                 </div>
                 <div className="space-y-4 pt-12">
-                  <img src="https://picsum.photos/seed/team3/400/300" alt="Team" className="rounded-3xl w-full aspect-square object-cover shadow-2xl" referrerPolicy="no-referrer" />
-                  <img src="https://picsum.photos/seed/team4/400/500" alt="Team" className="rounded-3xl w-full aspect-[3/4] object-cover shadow-2xl" referrerPolicy="no-referrer" />
+                  <img src="/src/unnamed.png" alt="Team" className="rounded-3xl w-full aspect-square object-cover shadow-2xl" referrerPolicy="no-referrer" />
+                  <img src="/Foto/4.png" alt="Team" className="rounded-3xl w-full aspect-[3/4] object-cover shadow-2xl" referrerPolicy="no-referrer" />
                 </div>
               </div>
             </div>
